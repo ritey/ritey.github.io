@@ -53,43 +53,69 @@
         <!-- Page Content -->
         <div class="container">
 
-            <div class="row">
+            <div class="row filter-button-group">
 
                 <div class="col-lg-12">
                     <h1 class="page-header">Free High Res Photos - Use as you wish</h1>
+                    <p><span class="button label label-info" data-filter="*">Show all</span> <span class="button label label-info" data-filter=".flowers">Flowers</span> <span class="button label label-info" data-filter=".animals">Animals</span></p>
                 </div>
 
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            </div>
+
+        </div>
+
+
+        <!-- Page Content -->
+        <div class="container">
+
+            <div class="row grid">
+
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb animals">
+                    <a class="thumbnail" href="/photos/large/butterfly-orange-17-08-2016.jpg">
+                        <img class="img-responsive" src="photos/thumbs/butterfly-orange-17-08-2016.jpg" alt="">
+                    </a>
+                    <div class="caption">
+                        <h3>Butterfly on an orange</h3>
+                        <p><span class="button label label-info" data-filter=".animals">#animals</span> <a onclick="ga('send', 'event', 'Download', 'zip', 'butterfly orange');" href="/downloads/butterfly-orange-17-08-2016.zip" class="pull-right" title="Download ZIP butterfly orange"><span class="fa fa-download" aria-hidden="true"></span></a></p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb flowers">
                     <a class="thumbnail" href="/photos/large/bud-16-08-2016.jpg">
-                        <img class="img-responsive" src="/photos/thumbs/bud-16-08-2016.jpg" alt="">
+                        <img class="img-responsive" src="photos/thumbs/bud-16-08-2016.jpg" alt="">
                     </a>
                     <div class="caption">
                         <h3>Buddleia</h3>
-                        <p><span class="label label-info">#flowers</span> <a onclick="ga('send', 'event', 'Download', 'zip', 'Buddleia');" href="/downloads/bud-16-08-2016.zip" class="pull-right" title="Download ZIP of Buddleia"><span class="fa fa-download" aria-hidden="true"></span></a></p>
+                        <p><span class="button label label-info" data-filter=".flowers">#flowers</span> <a onclick="ga('send', 'event', 'Download', 'zip', 'Buddleia');" href="/downloads/bud-16-08-2016.zip" class="pull-right" title="Download ZIP of Buddleia"><span class="fa fa-download" aria-hidden="true"></span></a></p>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb flowers">
                     <a class="thumbnail" href="/photos/large/daisy-bunch-17-08-2016.jpg">
-                        <img class="img-responsive" src="/photos/thumbs/daisy-bunch-17-08-2016.jpg" alt="">
+                        <img class="img-responsive" src="photos/thumbs/daisy-bunch-17-08-2016.jpg" alt="">
                     </a>
                     <div class="caption">
                         <h3>Misc flowers</h3>
-                        <p><span class="label label-info">#flowers</span> <a onclick="ga('send', 'event', 'Download', 'zip', 'daisy bunch');" href="/downloads/daisy-bunch-17-08-2016.zip" class="pull-right" title="Download ZIP of daisy bunch "><span class="fa fa-download" aria-hidden="true"></span></a></p>
+                        <p><span class="button label label-info" data-filter=".flowers">#flowers</span> <a onclick="ga('send', 'event', 'Download', 'zip', 'daisy bunch');" href="/downloads/daisy-bunch-17-08-2016.zip" class="pull-right" title="Download ZIP of daisy bunch "><span class="fa fa-download" aria-hidden="true"></span></a></p>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb flowers">
                     <a class="thumbnail" href="/photos/large/single-flower-17-08-2016.jpg">
-                        <img class="img-responsive" src="/photos/thumbs/single-flower-17-08-2016.jpg" alt="">
+                        <img class="img-responsive" src="photos/thumbs/single-flower-17-08-2016.jpg" alt="">
                     </a>
                     <div class="caption">
                         <h3>A flower</h3>
-                        <p><span class="label label-info">#flowers</span> <a onclick="ga('send', 'event', 'Download', 'zip', 'single flower');" href="/downloads/single-flower-17-08-2016.zip" class="pull-right" title="Download ZIP single flower"><span class="fa fa-download" aria-hidden="true"></span></a></p>
+                        <p><span class="button label label-info" data-filter=".flowers">#flowers</span> <a onclick="ga('send', 'event', 'Download', 'zip', 'single flower');" href="/downloads/single-flower-17-08-2016.zip" class="pull-right" title="Download ZIP single flower"><span class="fa fa-download" aria-hidden="true"></span></a></p>
                     </div>
                 </div>
 
             </div>
+
+        </div>
+
+        <!-- Page Content -->
+        <div class="container">
 
             <hr>
 
@@ -113,6 +139,7 @@
         <script src="js/plugins.js"></script>
         <script src="js/vendor/bootstrap.min.js"></script>
         <script src="js/main.js"></script>
+        <script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
         <script>
@@ -120,5 +147,21 @@
             ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
         </script>
         <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+        <script type="text/javascript">
+            $('document').ready(function() {
+                                // init Isotope
+                var $grid = $('.grid').isotope({
+                  itemSelector: '.thumb',
+                });
+                // filter items on button click
+                $('span.button').on( 'click', function() {
+                    var filterValue = $(this).attr('data-filter').replace('#','');
+                    console.log(filterValue);
+                    $grid.isotope({ filter: filterValue });
+                });
+
+            });
+        </script>
     </body>
 </html>
