@@ -234,6 +234,7 @@
         <script src="js/vendor/jquery.unveil.js"></script>
         <script src="js/main.js"></script>
         <script src="https://npmcdn.com/isotope-layout@3.0/dist/isotope.pkgd.min.js"></script>
+        <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.min.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
         <script>
@@ -244,18 +245,23 @@
 
         <script type="text/javascript">
             $('document').ready(function() {
-                                // init Isotope
-                var $grid = $('.grid').isotope({
-                  itemSelector: '.thumb',
-                });
-                // filter items on button click
-                $('span.button').on( 'click', function() {
-                    var filterValue = $(this).attr('data-filter').replace('#','');
-                    console.log(filterValue);
-                    $grid.isotope({ filter: filterValue });
-                });
 
-                $("img").unveil();
+                $('.grid').imagesLoaded( function() {
+
+                                    // init Isotope
+                    var $grid = $('.grid').isotope({
+                      itemSelector: '.thumb',
+                    });
+                    // filter items on button click
+                    $('span.button').on( 'click', function() {
+                        var filterValue = $(this).attr('data-filter').replace('#','');
+                        console.log(filterValue);
+                        $grid.isotope({ filter: filterValue });
+                    });
+
+                    $("img").unveil();
+
+                });
 
             });
         </script>
